@@ -29,3 +29,13 @@ These are flow files for node-red. Either copy the file to your Node-Red Directo
 17. Check values at your MQTT server (you can google this as each server is different).
 18. Configure sensors in HASS as per sensor code below.
 19. Voila!
+
+## Home Assistant Setup
+1. Enable MQTT
+2. Setup sensor e.g.:
+  ```yaml
+      - platform: mqtt
+        state_topic: “solax/energy/gridPower”
+        name: “Grid Power”
+        unit_of_measurement: “KW”
+        payload_not_available: “offline”`
