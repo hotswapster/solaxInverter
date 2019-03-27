@@ -1,0 +1,1099 @@
+[
+    {
+        "id": "d79adfaf.4afa78",
+        "type": "inject",
+        "z": "2c9a2bcf.68f704",
+        "name": "make request",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "305",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "a278c2b0.eebe6"
+            ]
+        ]
+    },
+    {
+        "id": "a278c2b0.eebe6",
+        "type": "http request",
+        "z": "2c9a2bcf.68f704",
+        "name": "Inverter IP here",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://192.168.1.49/api/realTimeData.htm",
+        "tls": "",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "196d2ad0.b24d2d"
+            ]
+        ]
+    },
+    {
+        "id": "f198ad77.3520e8",
+        "type": "function",
+        "z": "2c9a2bcf.68f704",
+        "name": "Change jargon to something useful",
+        "func": "var realtimeArray = msg.payload\nvar PV1Current, PV2Current, PV1Volt, PV2Volt, gridCurrent, gridVolt, gridPower, innerTemp, solarToday, solarTotal, FIP, PV1P, PV2P, battVolt, battCurr, battPower, battTemp, battCap, solarTotal2, energyToGrid, energyFromGrid, gridFreq, EPSVolt, EPSCurr, EPSVA, EPSFreq, status;\nPV1Current = { payload: realtimeArray[0][0], topic: \"solax/energy/pv1i\"};\nPV2Current = { payload: realtimeArray[0][1], topic: \"solax/energy/pv2i\"};\nPV1Volt = { payload: realtimeArray[0][2] , topic: \"solax/energy/pv1v\"};\nPV2Volt = { payload: realtimeArray[0][3] , topic: \"solax/energy/pv2v\"};\ngridCurrent = { payload: realtimeArray[0][4], topic: \"solax/energy/gridCurrent\" };\ngridVolt = { payload: realtimeArray[0][5], topic: \"solax/energy/gridVolt\" };\ngridPower = { payload: realtimeArray[0][6], topic: \"solax/energy/gridPower\" };\ninnerTemp = { payload: realtimeArray[0][7], topic: \"solax/energy/innerTemp\" };\nsolarToday = { payload: realtimeArray[0][8], topic: \"solax/energy/solarToday\" };\nsolarTotal = { payload: realtimeArray[0][9], topic: \"solax/energy/solarTotal\" };\nFIP = { payload: realtimeArray[0][10], topic: \"solax/energy/FIP\" };\nPV1P = { payload: realtimeArray[0][11], topic: \"solax/energy/PV1P\" };\nPV2P = { payload: realtimeArray[0][12], topic: \"solax/energy/PV2P\" };\nbattVolt = { payload: realtimeArray[0][13], topic: \"solax/energy/battVolt\" };\nbattCurr = { payload: realtimeArray[0][14], topic: \"solax/energy/battCurr\" };\nbattPower = { payload: realtimeArray[0][15], topic: \"solax/energy/battPower\" };\nbattTemp = { payload: realtimeArray[0][16], topic: \"solax/energy/battTemp\" };\nbattCap = { payload: realtimeArray[0][18], topic: \"solax/energy/battCap\" };\nsolarTotal2 = { payload: realtimeArray[0][19], topic: \"solax/energy/solarTotal2\" };\nenergyToGrid = { payload: realtimeArray[0][41], topic: \"solax/energy/energyToGrid\" };\nenergyFromGrid = { payload: realtimeArray[0][42], topic: \"solax/energy/energyFromGrid\" };\ngridFreq = { payload: realtimeArray[0][50], topic: \"solax/energy/gridFreq\" };\nEPSVolt = { payload: realtimeArray[0][53], topic: \"solax/energy/EPSVolt\" };\nEPSCurr = { payload: realtimeArray[0][54], topic: \"solax/energy/EPSCurr\" };\nEPSVA = { payload: realtimeArray[0][55], topic: \"solax/energy/EPSVA\" };\nEPSFreq = { payload: realtimeArray[0][56], topic: \"solax/energy/EPSFreq\" };\nstatus = { payload: realtimeArray[0][68], topic: \"solax/energy/status\" };\n\nreturn [PV1Current, PV2Current, PV1Volt, PV2Volt, gridCurrent, gridVolt, gridPower, innerTemp, solarToday, solarTotal, FIP, PV1P, PV2P, battVolt, battCurr, battPower, battTemp, battCap, solarTotal2, energyToGrid, energyFromGrid, gridFreq, EPSVolt, EPSCurr, EPSVA, EPSFreq, status ];\n",
+        "outputs": 27,
+        "noerr": 0,
+        "x": 440,
+        "y": 580,
+        "wires": [
+            [
+                "3c491829.d03d78",
+                "88e6c106.c3b3b8"
+            ],
+            [
+                "3c491829.d03d78",
+                "80eb49fb.01ea9"
+            ],
+            [
+                "3c491829.d03d78",
+                "945a12ac.2394b8"
+            ],
+            [
+                "3c491829.d03d78",
+                "213d82cd.cc5bee"
+            ],
+            [
+                "3c491829.d03d78",
+                "6df06c5.ef7e214"
+            ],
+            [
+                "3c491829.d03d78",
+                "7a6dcb3d.6243c4"
+            ],
+            [
+                "3c491829.d03d78",
+                "5149a9c7.5a0a08"
+            ],
+            [
+                "3c491829.d03d78",
+                "7a2e010d.ffbc58"
+            ],
+            [
+                "3c491829.d03d78",
+                "2a6bb969.2bdd2e"
+            ],
+            [
+                "3c491829.d03d78",
+                "741c5e08.698b4"
+            ],
+            [
+                "3c491829.d03d78",
+                "93dac597.bb9ad"
+            ],
+            [
+                "3c491829.d03d78",
+                "27a6e1e6.b15e26"
+            ],
+            [
+                "3c491829.d03d78",
+                "f65d411d.434138"
+            ],
+            [
+                "3c491829.d03d78",
+                "e94127ba.482f3"
+            ],
+            [
+                "3c491829.d03d78",
+                "8cebb92e.4cca5"
+            ],
+            [
+                "3c491829.d03d78",
+                "e4c7604b.a0b01"
+            ],
+            [
+                "3c491829.d03d78",
+                "2f4aaeaf.f46ff2"
+            ],
+            [
+                "3c491829.d03d78",
+                "22646eee.fe75ba",
+                "58e13471.429df4"
+            ],
+            [
+                "3c491829.d03d78",
+                "8358d2d2.7c1a1"
+            ],
+            [
+                "3c491829.d03d78",
+                "bc65dddc.31fe38"
+            ],
+            [
+                "3c491829.d03d78",
+                "a8a0fd42.f10128"
+            ],
+            [
+                "3c491829.d03d78",
+                "5329d9f4.47b4a8"
+            ],
+            [
+                "3c491829.d03d78",
+                "8523d4bc.50d898"
+            ],
+            [
+                "3c491829.d03d78",
+                "33d7f53a.2419c2"
+            ],
+            [
+                "3c491829.d03d78",
+                "ae4aa285.1ea548"
+            ],
+            [
+                "3c491829.d03d78",
+                "552b04d9.5d3c3c"
+            ],
+            [
+                "3c491829.d03d78",
+                "d31aa387.f3723"
+            ]
+        ],
+        "outputLabels": [
+            "PV1Current",
+            "PV2Current",
+            "PV1Volt",
+            "PV2Volt",
+            "gridCurrent",
+            "gridVolt",
+            "gridPower",
+            "innerTemp",
+            "solarToday",
+            "solarTotal",
+            "FIP",
+            "PV1P",
+            "PV2P",
+            "battVolt",
+            "battCurr",
+            "battPower",
+            "battTemp",
+            "battCap",
+            "solarTotal2",
+            "energyToGrid",
+            "energyFromGrid",
+            "gridFreq",
+            "EPSVolt",
+            "EPSCurr",
+            "EPSVA",
+            "EPSFreq",
+            "status"
+        ]
+    },
+    {
+        "id": "3c491829.d03d78",
+        "type": "mqtt out",
+        "z": "2c9a2bcf.68f704",
+        "name": "Configure MQTT here (leave topic blank)",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b27c6d10.b2ea2",
+        "x": 440,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "196d2ad0.b24d2d",
+        "type": "split",
+        "z": "2c9a2bcf.68f704",
+        "name": "cookie",
+        "splt": "[",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "23fe6ceb.a2a04c"
+            ]
+        ]
+    },
+    {
+        "id": "23fe6ceb.a2a04c",
+        "type": "switch",
+        "z": "2c9a2bcf.68f704",
+        "name": "chocolate",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "index",
+                "v": "1",
+                "vt": "num",
+                "v2": "1",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "c63642d3.21b88"
+            ]
+        ]
+    },
+    {
+        "id": "c63642d3.21b88",
+        "type": "split",
+        "z": "2c9a2bcf.68f704",
+        "name": "chips",
+        "splt": "]",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 210,
+        "y": 340,
+        "wires": [
+            [
+                "c042c90f.7a1d88"
+            ]
+        ]
+    },
+    {
+        "id": "c042c90f.7a1d88",
+        "type": "switch",
+        "z": "2c9a2bcf.68f704",
+        "name": "golden gaytime",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "index",
+                "v": "0",
+                "vt": "num",
+                "v2": "0",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 340,
+        "wires": [
+            [
+                "fe4de4ea.ca1118"
+            ]
+        ]
+    },
+    {
+        "id": "fe4de4ea.ca1118",
+        "type": "string",
+        "z": "2c9a2bcf.68f704",
+        "name": "kit kat",
+        "methods": [
+            {
+                "name": "parseCSV",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": ","
+                    },
+                    {
+                        "type": "str",
+                        "value": ""
+                    },
+                    {
+                        "type": "str",
+                        "value": ""
+                    },
+                    {
+                        "type": "str",
+                        "value": "/n"
+                    }
+                ]
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "f198ad77.3520e8"
+            ]
+        ]
+    },
+    {
+        "id": "88e6c106.c3b3b8",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV 1 Current",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV 1 Current",
+        "label": "amps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "25",
+        "colors": [
+            "#00B500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "80eb49fb.01ea9",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV 2 Current",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV 2 Current",
+        "label": "amps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "25",
+        "colors": [
+            "#00B500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5149a9c7.5a0a08",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Generated Power",
+        "group": "86d788c8.8d051",
+        "order": 1,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Solar Power",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "6000",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 870,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "93dac597.bb9ad",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "FIP Power",
+        "group": "86d788c8.8d051",
+        "order": 2,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Mains Import/Export",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": "-6000",
+        "max": "6000",
+        "colors": [
+            "#CA3838",
+            "#adffad",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "945a12ac.2394b8",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV 1 Voltage",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV 1 Voltage",
+        "label": "volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "700",
+        "colors": [
+            "#CA3838",
+            "#E6E600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "213d82cd.cc5bee",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV 2 Voltage",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV 2 Voltage",
+        "label": "volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "700",
+        "colors": [
+            "#CA3838",
+            "#E6E600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "27a6e1e6.b15e26",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV1 Power",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV1 Power",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "3600",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f65d411d.434138",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "PV2 Power",
+        "group": "b62e8b7a.a8c16",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "PV2 Power",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "3600",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "6df06c5.ef7e214",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Grid Current",
+        "group": "ea18b3ca.c9976",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Grid Current",
+        "label": "amps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "63",
+        "colors": [
+            "#00B500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7a6dcb3d.6243c4",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Grid Voltage",
+        "group": "ea18b3ca.c9976",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Grid Voltage",
+        "label": "volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "275",
+        "colors": [
+            "#CA3838",
+            "#E6E600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7a2e010d.ffbc58",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Inverter Internal Temp",
+        "group": "ea18b3ca.c9976",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Inverter Temperature",
+        "label": "degrees C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "80",
+        "colors": [
+            "#00b500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "2a6bb969.2bdd2e",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 4,
+        "width": "3",
+        "height": "2",
+        "name": "Solar Generated Today",
+        "label": "Solar Today",
+        "format": "{{msg.payload}} kWh",
+        "layout": "col-center",
+        "x": 860,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "741c5e08.698b4",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 5,
+        "width": "3",
+        "height": "2",
+        "name": "Total Generated",
+        "label": "Total Generated",
+        "format": "{{msg.payload}} kWh",
+        "layout": "col-center",
+        "x": 1060,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "e94127ba.482f3",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Voltage",
+        "group": "ca2fee4.69fbc1",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Batt Voltage",
+        "label": "volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#CA3838",
+            "#E6E600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "8cebb92e.4cca5",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Current",
+        "group": "ca2fee4.69fbc1",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Batt Current",
+        "label": "amps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "20",
+        "colors": [
+            "#00B500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "e4c7604b.a0b01",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Power",
+        "group": "ca2fee4.69fbc1",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Batt Power",
+        "label": "watts",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "5000",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2f4aaeaf.f46ff2",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Internal Temp",
+        "group": "ca2fee4.69fbc1",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Batt Temperature",
+        "label": "degrees C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "80",
+        "colors": [
+            "#00b500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1070,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "22646eee.fe75ba",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Capacity (Battery)",
+        "group": "ca2fee4.69fbc1",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Batt Capacity",
+        "label": "kWh",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "6500",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1080,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "8358d2d2.7c1a1",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 6,
+        "width": "3",
+        "height": "2",
+        "name": "Solar Total 2 ?",
+        "label": "Solar Total 2 ?",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 880,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bc65dddc.31fe38",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 7,
+        "width": "3",
+        "height": "2",
+        "name": "Exported Energy",
+        "label": "Exported Energy",
+        "format": "{{msg.payload}} kWh",
+        "layout": "col-center",
+        "x": 1070,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a8a0fd42.f10128",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 8,
+        "width": "3",
+        "height": "2",
+        "name": "Imported Energy",
+        "label": "Imported Energy",
+        "format": "{{msg.payload}} kWh",
+        "layout": "col-center",
+        "x": 1070,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "5329d9f4.47b4a8",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 9,
+        "width": "3",
+        "height": "2",
+        "name": "Grid Freq",
+        "label": "Grid Freq",
+        "format": "{{msg.payload}} Hz",
+        "layout": "col-center",
+        "x": 900,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "8523d4bc.50d898",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "EPS Voltage",
+        "group": "41e7cab8.533234",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "EPS Voltage",
+        "label": "volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "275",
+        "colors": [
+            "#CA3838",
+            "#E6E600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 890,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "33d7f53a.2419c2",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "EPS Current",
+        "group": "41e7cab8.533234",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "EPS Current",
+        "label": "amps",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "20",
+        "colors": [
+            "#00B500",
+            "#E6E600",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "ae4aa285.1ea548",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "EPS Apparent Power",
+        "group": "41e7cab8.533234",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "EPS Apparent Power",
+        "label": "VA",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "5000",
+        "colors": [
+            "#00b500",
+            "#E8EB06",
+            "#CA3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 860,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "552b04d9.5d3c3c",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "41e7cab8.533234",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "EPS Freq",
+        "label": "EPS Freq",
+        "format": "{{msg.payload}} Hz",
+        "layout": "col-center",
+        "x": 1040,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "d31aa387.f3723",
+        "type": "ui_text",
+        "z": "2c9a2bcf.68f704",
+        "group": "86d788c8.8d051",
+        "order": 10,
+        "width": "3",
+        "height": "2",
+        "name": "Status",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 1030,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "58e13471.429df4",
+        "type": "ui_gauge",
+        "z": "2c9a2bcf.68f704",
+        "name": "Batt Capacity (Summary)",
+        "group": "86d788c8.8d051",
+        "order": 3,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Batt Capacity",
+        "label": "kWh",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "6500",
+        "colors": [
+            "#CA3838",
+            "#E8EB06",
+            "#00B500"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 850,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c9add6f4.1b741",
+        "type": "comment",
+        "z": "2c9a2bcf.68f704",
+        "name": "Dashboard",
+        "info": "These nodes are to display information\non the Node-red Dashboard.\n\nThey are not required to send information\nto HASS or MQTT.\n\nYou may delete if you wish.",
+        "x": 886.5,
+        "y": 210,
+        "wires": []
+    },
+    {
+        "id": "5461c8e7.4b09c8",
+        "type": "comment",
+        "z": "2c9a2bcf.68f704",
+        "name": "MQTT Config",
+        "info": "Change the IP address in the node below\nto the IP address of your MQTT broker.\n\nRemember Authentication if you have\nconfigured it.\n\nAs the topic's are already defined in\nthe function above, there is no need\nto define a topic here.\n\nAll topics are configured to start with:\nsolax/energy/**value topic**\n\nIf you hover over the output of the\nfunctino block above you'll see what each\nvalue is called in the topic e.g the\noutput one is called \"PV1Current\".\nTo call this topic for your MQTT broker,\nrequest:\nsolax/energy/PV1Current\n\nOr you can read the code inside the function.",
+        "x": 430,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "698c1482.c1b97c",
+        "type": "comment",
+        "z": "2c9a2bcf.68f704",
+        "name": "Readme",
+        "info": "You'll need to install the following nodes:\n- node-red-dashboard\n- node-red-contrib-string\n\nThen configure inverter IP in the:\n\"Inverter IP Here\"\n\nThen configure MQTT broker in:\n\"Configure MQTT here\"\n\nThen configure Home Assistant Sensors.\n(example below)\n- platform: mqtt\n  state_topic: \"solax/energy/gridPower\"\n  name: \"Grid Power\"\n  unit_of_measurement: \"KW\"\n  payload_not_available: \"offline\"\n\nThrown together by J Bracken.\n\nFound help in the following places:\nhttps://community.home-assistant.io/t/solax-hybrid-inverter/22123\nhttps://community.home-assistant.io/t/solax-solar-inverter-setup-guide/48008\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLicense Jargon\nMIT License\n\nCopyright (c) 2018 Jaidan Bracken\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+        "x": 200,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b27c6d10.b2ea2",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "LolaMqtt",
+        "broker": "192.168.1.10",
+        "port": "1883",
+        "clientid": "cora",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "b62e8b7a.a8c16",
+        "type": "ui_group",
+        "z": "",
+        "name": "Panels",
+        "tab": "e0ece646.152d78",
+        "order": 3,
+        "disp": true,
+        "width": "9",
+        "collapse": true
+    },
+    {
+        "id": "86d788c8.8d051",
+        "type": "ui_group",
+        "z": "",
+        "name": "Summary",
+        "tab": "e0ece646.152d78",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": true
+    },
+    {
+        "id": "ea18b3ca.c9976",
+        "type": "ui_group",
+        "z": "",
+        "name": "Grid",
+        "tab": "e0ece646.152d78",
+        "order": 2,
+        "disp": true,
+        "width": "9",
+        "collapse": true
+    },
+    {
+        "id": "ca2fee4.69fbc1",
+        "type": "ui_group",
+        "z": "",
+        "name": "Battery",
+        "tab": "e0ece646.152d78",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "41e7cab8.533234",
+        "type": "ui_group",
+        "z": "",
+        "name": "EPS",
+        "tab": "e0ece646.152d78",
+        "order": 5,
+        "disp": true,
+        "width": "3",
+        "collapse": true
+    },
+    {
+        "id": "e0ece646.152d78",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Power Gen",
+        "icon": "flash_on"
+    }
+]
