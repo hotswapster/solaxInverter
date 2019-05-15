@@ -8,6 +8,17 @@ These are flow files for node-red. Either copy the file to your Node-Red Directo
 `history.json` is a small summary.
 `realtimeData.json` has much more detail, states, values and alarms.
 
+## Inverter Compatibility
+Before following the instruction below, check your inverter to see if it's compatible with this software.
+1. Connect inverter to your local network using Wi-Fi or Ethernet
+2. Navigate to the following address in your browser:
+`http://<<inverterIP>>/api/realTimeData.htm`
+3. If the browser returns a JSON like string, it's likely that this software will work with your inverter
+
+NOTE: It's possible that different firmware in your inverter may change this string. You will need to decode the object and change the main function in the node-red file.
+
+
+
 ## Instructions
 
 1. Put Inverter on your network (Ethernet or Wifi). Use either a DHCP Reservation, Static IP or configure your DNS and give your inverter a name.
