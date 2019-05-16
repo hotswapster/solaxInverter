@@ -17,6 +17,11 @@ Before following the instruction below, check your inverter to see if it's compa
 
 NOTE: It's possible that different firmware in your inverter may change this string. You will need to decode the object and change the main function in the node-red file.
 
+### Firmware Compatibility
+Please add your inverter firmware here if it works.
+
+Works with:
+* Solax_SI_CH_2nd_20160912_DE02
 
 
 ## Instructions
